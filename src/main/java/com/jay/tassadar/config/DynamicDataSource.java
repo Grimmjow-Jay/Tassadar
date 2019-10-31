@@ -15,8 +15,6 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        String s = contextHolder.get();
-        System.out.println(s);
-        return s;
+        return contextHolder.get();
     }
 }

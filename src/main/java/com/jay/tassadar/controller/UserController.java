@@ -17,8 +17,8 @@ public class UserController {
     @RequestMapping("/signIn")
     public boolean signIn() {
 //        String dataBase = "database0";
-//        String dataBase = "database1";
-        String dataBase = "database2";
+        String dataBase = "database1";
+//        String dataBase = "database2";
         try {
             DynamicDataSource.setDataSourceType(dataBase);
             User user = new User();

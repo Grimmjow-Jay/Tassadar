@@ -1,6 +1,8 @@
 package com.jay.tassadar.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,17 +11,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@EnableConfigurationProperties(DataSourceProperties.class)
 public class DynamicDataSourceConfig {
 
     @Bean
-    public DynamicDataSource dynamicDataSource() {
+    public DynamicDataSource dynamicDataSource(DataSourceProperties dataSourceProperties) {
         Map<Object, Object> dataSources = new HashMap<>();
         HikariDataSource dataSource0 = DataSourceBuilder.create()
                 .type(HikariDataSource.class)
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .username("root")
-                .password("123456")
-                .url("jdbc:mysql:///tassadar?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC")
+                .driverClassName(dataSourceProperties.getDriverClassName())
+                .username(dataSourceProperties.getUsername())
+                .password(dataSourceProperties.getPassword())
+                .url(dataSourceProperties.getUrl())
                 .build();
         dataSources.put("database0", dataSource0);
 
