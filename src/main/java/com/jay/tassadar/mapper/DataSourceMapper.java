@@ -10,4 +10,5 @@ public interface DataSourceMapper {
 
     List<DataSource> getAll();
 
+    DataSource getDatasource(String companyId);
 }

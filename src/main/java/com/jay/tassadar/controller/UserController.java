@@ -3,6 +3,7 @@ package com.jay.tassadar.controller;
 import com.jay.tassadar.config.DynamicDataSource;
 import com.jay.tassadar.entity.User;
 import com.jay.tassadar.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,14 +14,14 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Autowired
+    private DynamicDataSource dataSource;
 
     @RequestMapping("/signIn")
     public boolean signIn() {
-//        String dataBase = "database0";
-        String dataBase = "database1";
-//        String dataBase = "database2";
+        String companyId = "companyId";
         try {
-            DynamicDataSource.setDataSourceType(dataBase);
+            dataSource.setDataSourceType(companyId);
             User user = new User();
             user.setUserName("jay");
             user.setPhone(150);
