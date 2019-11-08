@@ -14,6 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 拦截所有访问，进行token验证
+ * <pre>
+ * 身份认证流程：
+ *   登录：用户传的用户名、密码参数无误后，生成一个token，并把这个token对应的用户信息保存起来，
+ *        可以保存在内存里，也可以保存到数据库或者redis等等。然后将这个token返回给用户。
+ *   认证：用户每次访问都需要携带token，服务器拦截所有需要验证身份的请求，获取到参数获取请求头
+ *        里面的token，然后对该token进行校验，判断该token有效，如果有效，则延长token的有效期，
+ *        并且将用户信息存到方便获取的地方，如HttpServletRequest里面。拦截器放行，进行业务处理。
+ * </pre>
  */
 @Component
 public class TokenInterceptor implements WebMvcConfigurer {
