@@ -40,7 +40,7 @@ public class TokenCacheSingleton {
         long now = System.currentTimeMillis();
         if (tokenInfo.updateTime + duration < now) { // 过期了，删掉cache里面的，返回过期了
             cache.remove(token);
-            BusinessException.assertTrue(true, "Token过期了");
+            BusinessException.assertTrue("Token过期了");
         }
         BusinessException.assertTrue(!tokenInfo.ip.equals(ip), "Token异常");
 
